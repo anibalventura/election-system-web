@@ -4,6 +4,10 @@ import { fileURLToPath } from "url";
 import { imageStorage } from "./helpers/storage.helper.js";
 import expressHbs from "express-handlebars";
 import errorRoutes from "./routes/error.routes.js";
+import database from "./helpers/database.helper.js";
+import Candidate from "./models/candidate.model.js";
+import Party from "./models/party.model.js";
+import Position from "./models/position.model.js";
 
 const PORT = process.env.PORT || 5001;
 const app = express();
@@ -31,7 +35,20 @@ app.use(imageStorage);
 // Routes.
 app.use(errorRoutes);
 
-// Start the server.
-app.listen(PORT, () =>
-  console.log(`Server running on port http://localhost:${PORT}`)
-);
+// Database relationships.
+Candidate.belongsTo(Party, { constraints: true, onDelete: "CASCADE" });
+Party.hasMany(Candidate);
+Candidate.belongsTo(Position, { constraints: true, onDelete: "CASCADE" });
+Position.hasMany(Candidate);
+
+// Init database and start the server.
+database
+  .sync(/*{ force: true }*/)
+  .then((_) => {
+    app.listen(PORT, () =>
+      console.log(`Server running on port http://localhost:${PORT}`)
+    );
+  })
+  .catch((err) => {
+    console.log(err);
+  });
