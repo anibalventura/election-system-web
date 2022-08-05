@@ -3,11 +3,18 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { imageStorage } from "./helpers/storage.helper.js";
 import expressHbs from "express-handlebars";
+import flash from "connect-flash";
 import errorRoutes from "./routes/error.routes.js";
 import database from "./helpers/database.helper.js";
 import Candidate from "./models/candidate.model.js";
 import Party from "./models/party.model.js";
 import Position from "./models/position.model.js";
+import { checkSession } from "./middleware/auth.middleware.js";
+import session from "express-session";
+import authRoutes from "./routes/auth.routes.js";
+import adminRoutes from "./routes/admin.routes.js";
+import errors from "./middleware/errors.middleware.js";
+import homeRoutes from "./routes/home.routes.js";
 
 const PORT = process.env.PORT || 5001;
 const app = express();
@@ -31,8 +38,17 @@ app.use(express.static(path.join(__dirname, "../public")));
 const imagePath = "/public/images";
 app.use(imagePath, express.static(path.join(__dirname, `..${imagePath}`)));
 app.use(imageStorage);
+app.use(
+  session({ secret: "anything", resave: true, saveUninitialized: false })
+);
+app.use(flash());
+app.use(checkSession);
+app.use(errors);
 
 // Routes.
+app.use(homeRoutes);
+app.use(authRoutes);
+app.use(adminRoutes);
 app.use(errorRoutes);
 
 // Database relationships.

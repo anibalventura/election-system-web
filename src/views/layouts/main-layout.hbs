@@ -1,44 +1,83 @@
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{{pageTitle}} - Election System</title>
-    <link rel="stylesheet" href="/assets/lib/bootstrap/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="/assets/css/style.css" />
-  </head>
-  <body class="d-flex flex-column min-vh-100">
-    <header>
-      <nav class="navbar navbar-expand navbar-dark bg-dark">
-        <a class="navbar-brand ms-4" href="/">Election System</a>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{pageTitle}} - Election System</title>
+  <link rel="stylesheet" href="/assets/lib/bootstrap/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/assets/css/style.css" />
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+  <header>
+    <nav class="navbar navbar-expand navbar-dark bg-dark">
+      <a class="navbar-brand ms-4" href="{{#if isAuth}}/admin{{else}}/{{/if}}">Election System</a>
+      <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+        <ul class="navbar-nav">
+          {{#if isAuth}}
             <li class="nav-item">
-              <a class="nav-link {{#if homeActive}}active{{/if}}" aria-current="page" href="/">Home</a>
+              <a class="nav-link {{#if candidateActive}}active{{/if}}" aria-current="page" href="/candidate">Candidates</a>
             </li>
-          </ul>
-        </div>
-      </nav>
-    </header>
-
-    <main class="container-fluid mt-4">
-      {{{body}}}
-    </main>
-
-    <footer class="border-top bg-white pt-3 footer text-muted mt-auto">
-      <div class="container-fluid text-center">
-        <p>
-          &copy;
-          <span id="current-year"></span>
-          -
-          <a
-            class="text-decoration-none"
-            href="https://www.anibalventura.com/"
-          >Anibal Ventura</a>
-        </p>
+            <li class="nav-item">
+              <a class="nav-link {{#if partyActive}}active{{/if}}" aria-current="page" href="/party">Parties</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link {{#if positionActive}}active{{/if}}" aria-current="page" href="/position">Positions</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link {{#if citizenActive}}active{{/if}}" aria-current="page" href="/citizen">Citizens</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link {{#if electionActive}}active{{/if}}" aria-current="page" href="/election">Elections</a>
+            </li>
+          {{else}}
+          {{/if}}
+        </ul>
+        <ul class="navbar-nav row align-items-end mx-2">
+          <li class="nav-item">
+            {{#if isAuth}}
+              <form method="post" action="/auth/logout">
+                <button class="btn btn-link m-0 p-0 mt-2 text-decoration-none text-danger" type="submit">Logout</button>
+              </form>
+            {{else}}
+              <a class="nav-link {{#if loginActive}}active{{/if}}" aria-current="page" href="/auth/login">Login</a>
+            {{/if}}
+          </li>
+        </ul>
       </div>
-    </footer>
-    <script src="/assets/lib/bootstrap/js/bootstrap.min.js"></script>
-    <script src="/assets/js/scripts.js"></script>
-  </body>
+    </nav>
+  </header>
+
+  <main class="container-fluid mt-4">
+    {{#if hasErrorMsgs}}
+    <div class="row justify-content-center">
+      <div class="col-5 alert alert-danger alert-dismissible fade show" role="alert">
+        <ul>
+          {{#each errorMsgs}}
+            <li>{{this}}</li>
+          {{/each}}
+        </ul>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    </div>
+    {{/if}}
+
+    {{{body}}}
+  </main>
+
+  <footer class="border-top bg-white pt-3 footer text-muted mt-auto">
+    <div class="container-fluid text-center">
+      <p>
+        &copy;
+        <span id="current-year"></span>
+        -
+        <a class="text-decoration-none" href="https://www.anibalventura.com/">Anibal Ventura</a>
+      </p>
+    </div>
+  </footer>
+  <script src="/assets/lib/bootstrap/js/bootstrap.min.js"></script>
+  <script src="/assets/js/scripts.js"></script>
+</body>
+
 </html>

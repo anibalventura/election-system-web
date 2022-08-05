@@ -1,0 +1,50 @@
+<main>
+  <div class="row justify-content-center mt-5">
+    <div class="col-4">
+      <div class="card shadow-sm">
+        <div class="card-header bg-secondary">
+          <h5 class="text-white mt-2">Login</h5>
+        </div>
+        <div class="card-body">
+          <form method="post" action="/auth/login">
+            <div>
+              <div class="mb-3">
+                <label for="userName" class="form-label"><strong
+                  >Username</strong></label>
+                <input
+                  required
+                  type="text"
+                  class="form-control"
+                  id="userName"
+                  name="userName"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="password" class="form-label"><strong
+                  >Password</strong></label>
+                <input
+                  required
+                  type="password"
+                  class="form-control"
+                  id="password"
+                  name="password"
+                />
+              </div>
+            </div>
+
+            <div class="text-center mt-4">
+              <button
+                type="submit"
+                class="btn btn-primary mb-4 px-4"
+              >Login</button>
+              <a
+                class="nav-link text-secondary fw-bold text-decoration-none"
+                href="/auth/register"
+              >Don't have an account? Register now!</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

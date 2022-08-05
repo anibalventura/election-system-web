@@ -29,7 +29,7 @@ const User = database.define("user", {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  state: {
+  status: {
     type: Sequelize.BOOLEAN,
     allowNull: false,
   },
