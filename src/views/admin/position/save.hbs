@@ -6,7 +6,7 @@
           <h4>{{#if editMode}}Edit Position{{else}}Create a Position{{/if}}</h4>
         </div>
         <div class="card-body">
-          <form method="post" action="{{#if editMode}}/positions/edit{{else}}/positions/create{{/if}}">
+          <form method="post" action="/positions/{{#if editMode}}edit{{else}}create{{/if}}">
 
             {{#if editMode}}
                 <input type="hidden" name="positionId" value="{{position.id}}">
