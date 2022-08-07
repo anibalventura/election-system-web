@@ -3,14 +3,18 @@
     <div class="col-11">
       <div class="card shadow-sm">
         <div class="card-header bg-primary bg-opacity-75">
-          <h3 class="text-white">
-            Parties Maintenance
-            <a
-              class="btn btn-success shadow-sm"
-              href="/parties/create"
-            >Create</a>
-          </h3>
+          <div class="row">
+            <h3 class="col text-white">
+              Parties Maintenance
+            </h3>
 
+            <div class="col d-flex justify-content-end">
+              <a
+                class="btn btn-success shadow-sm"
+                href="/parties/create"
+              >Create</a>
+            </div>
+          </div>
         </div>
         {{#if hasParties}}
           <div class="card-body">

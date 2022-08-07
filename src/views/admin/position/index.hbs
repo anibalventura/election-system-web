@@ -3,14 +3,18 @@
     <div class="col-11">
       <div class="card shadow-sm">
         <div class="card-header bg-primary bg-opacity-75">
-          <h3 class="text-white">
-            Positions Maintenance
-            <a
-              class="btn btn-success shadow-sm"
-              href="/positions/create"
-            >Create</a>
-          </h3>
+          <div class="row">
+            <h3 class="col text-white">
+              Positions Maintenance
+            </h3>
 
+            <div class="col d-flex justify-content-end">
+              <a
+                class="btn btn-success shadow-sm"
+                href="/positions/create"
+              >Create</a>
+            </div>
+          </div>
         </div>
         {{#if hasPositions}}
           <div class="card-body">
