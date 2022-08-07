@@ -5,7 +5,7 @@ export const getIndex = (req, res) => {
     .then((result) => {
       const citizensResult = result.map((result) => result.dataValues);
 
-      res.render("citizen/index", {
+      res.render("admin/citizen/index", {
         pageTitle: "Citizens",
         citizensActive: true,
         citizens: citizensResult,
@@ -18,7 +18,7 @@ export const getIndex = (req, res) => {
 };
 
 export const getCreate = (req, res) => {
-  res.render("citizen/save", {
+  res.render("admin/citizen/save", {
     pageTitle: "Create Citizen",
     citizensActive: true,
     editMode: false,
@@ -57,7 +57,7 @@ export const getEdit = (req, res) => {
         return res.redirect("/citizens");
       }
 
-      res.render("citizen/save", {
+      res.render("admin/citizen/save", {
         pageTitle: "Create Citizen",
         citizen: citizen,
         citizensActive: true,

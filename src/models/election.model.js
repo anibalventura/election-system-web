@@ -1,7 +1,7 @@
 import Sequelize from "sequelize";
 import database from "../helpers/database.helper.js";
 
-const Election = database.define("election", {
+const Election = database.define("elections", {
   id: {
     type: Sequelize.INTEGER,
     primaryKey: true,

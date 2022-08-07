@@ -5,7 +5,7 @@ export const getIndex = (req, res) => {
     .then((result) => {
       const positionsResult = result.map((result) => result.dataValues);
 
-      res.render("position/index", {
+      res.render("admin/position/index", {
         pageTitle: "Positions",
         positionsActive: true,
         positions: positionsResult,
@@ -18,7 +18,7 @@ export const getIndex = (req, res) => {
 };
 
 export const getCreate = (req, res) => {
-  res.render("position/save", {
+  res.render("admin/position/save", {
     pageTitle: "Create Position",
     positionsActive: true,
     editMode: false,
@@ -53,7 +53,7 @@ export const getEdit = (req, res) => {
         return res.redirect("/positions");
       }
 
-      res.render("position/save", {
+      res.render("admin/position/save", {
         pageTitle: "Create Position",
         position: position,
         positionsActive: true,

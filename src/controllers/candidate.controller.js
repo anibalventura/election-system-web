@@ -38,7 +38,7 @@ export const getIndex = (req, res) => {
     .then((result) => {
       const candidates = result.map((result) => result.dataValues);
 
-      res.render("candidate/index", {
+      res.render("admin/candidate/index", {
         pageTitle: "Home",
         candidatesActive: true,
         candidates: candidates,
@@ -60,7 +60,7 @@ export const getCreate = (req, res) => {
         .then((result) => {
           const positionsResult = result.map((result) => result.dataValues);
 
-          res.render("candidate/save", {
+          res.render("admin/candidate/save", {
             pageTitle: "Create Candidate",
             parties: partiesResult,
             positions: positionsResult,
@@ -121,7 +121,7 @@ export const getEdit = (req, res) => {
         return res.redirect("/candidates");
       }
 
-      res.render("candidate/save", {
+      res.render("admin/candidate/save", {
         pageTitle: "Create Candidate",
         candidate: candidate,
         parties: parties,

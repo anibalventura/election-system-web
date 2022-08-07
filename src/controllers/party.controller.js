@@ -5,7 +5,7 @@ export const getIndex = (req, res) => {
     .then((result) => {
       const partiesResult = result.map((result) => result.dataValues);
 
-      res.render("party/index", {
+      res.render("admin/party/index", {
         pageTitle: "Parties",
         partiesActive: true,
         parties: partiesResult,
@@ -18,7 +18,7 @@ export const getIndex = (req, res) => {
 };
 
 export const getCreate = (req, res) => {
-  res.render("party/save", {
+  res.render("admin/party/save", {
     pageTitle: "Create Party",
     partiesActive: true,
     editMode: false,
@@ -55,7 +55,7 @@ export const getEdit = (req, res) => {
         return res.redirect("/parties");
       }
 
-      res.render("party/save", {
+      res.render("admin/party/save", {
         pageTitle: "Create Party",
         party: party,
         partiesActive: true,
