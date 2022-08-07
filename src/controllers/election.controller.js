@@ -12,8 +12,6 @@ export const getIndex = (req, res) => {
         }
       });
 
-      console.log("activeElection", activeElection);
-
       res.render("admin/election/index", {
         pageTitle: "Elections",
         electionsActive: true,

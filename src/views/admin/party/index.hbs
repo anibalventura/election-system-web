@@ -8,12 +8,14 @@
               Parties Maintenance
             </h3>
 
-            <div class="col d-flex justify-content-end">
-              <a
-                class="btn btn-success shadow-sm"
-                href="/parties/create"
-              >Create</a>
-            </div>
+            {{#if activeElection}}{{else}}
+              <div class="col d-flex justify-content-end">
+                <a
+                  class="btn btn-success shadow-sm"
+                  href="/parties/create"
+                >Create</a>
+              </div>
+            {{/if}}
           </div>
         </div>
         {{#if hasParties}}

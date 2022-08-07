@@ -1,16 +1,33 @@
 import Party from "../models/party.model.js";
+import Election from "../models/election.model.js";
 
 export const getIndex = (req, res) => {
-  Party.findAll()
+  Election.findAll()
     .then((result) => {
-      const partiesResult = result.map((result) => result.dataValues);
+      const electionsResult = result.map((result) => result.dataValues);
+      let activeElection = false;
 
-      res.render("admin/party/index", {
-        pageTitle: "Parties",
-        partiesActive: true,
-        parties: partiesResult,
-        hasParties: partiesResult.length > 0,
+      electionsResult.forEach((election) => {
+        if (election.status) {
+          activeElection = election.status;
+        }
       });
+
+      Party.findAll()
+        .then((result) => {
+          const partiesResult = result.map((result) => result.dataValues);
+
+          res.render("admin/party/index", {
+            pageTitle: "Parties",
+            partiesActive: true,
+            parties: partiesResult,
+            hasParties: partiesResult.length > 0,
+            activeElection: activeElection,
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     })
     .catch((err) => {
       console.log(err);
@@ -47,20 +64,36 @@ export const postCreate = (req, res) => {
 export const getEdit = (req, res) => {
   const id = req.params.partyId;
 
-  Party.findOne({ where: { id: id } })
+  Election.findAll()
     .then((result) => {
-      const party = result.dataValues;
+      const electionsResult = result.map((result) => result.dataValues);
+      let activeElection = false;
 
-      if (!party) {
-        return res.redirect("/parties");
-      }
-
-      res.render("admin/party/save", {
-        pageTitle: "Create Party",
-        party: party,
-        partiesActive: true,
-        editMode: true,
+      electionsResult.forEach((election) => {
+        if (election.status) {
+          activeElection = election.status;
+        }
       });
+
+      Party.findOne({ where: { id: id } })
+        .then((result) => {
+          const party = result.dataValues;
+
+          if (!party) {
+            return res.redirect("/parties");
+          }
+
+          res.render("admin/party/save", {
+            pageTitle: "Edit Party",
+            party: party,
+            partiesActive: true,
+            editMode: true,
+            activeElection: activeElection,
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     })
     .catch((err) => {
       console.log(err);

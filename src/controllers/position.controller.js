@@ -1,16 +1,33 @@
 import Position from "../models/position.model.js";
+import Election from "../models/election.model.js";
 
 export const getIndex = (req, res) => {
-  Position.findAll()
+  Election.findAll()
     .then((result) => {
-      const positionsResult = result.map((result) => result.dataValues);
+      const electionsResult = result.map((result) => result.dataValues);
+      let activeElection = false;
 
-      res.render("admin/position/index", {
-        pageTitle: "Positions",
-        positionsActive: true,
-        positions: positionsResult,
-        hasPositions: positionsResult.length > 0,
+      electionsResult.forEach((election) => {
+        if (election.status) {
+          activeElection = election.status;
+        }
       });
+
+      Position.findAll()
+        .then((result) => {
+          const positionsResult = result.map((result) => result.dataValues);
+
+          res.render("admin/position/index", {
+            pageTitle: "Positions",
+            positionsActive: true,
+            positions: positionsResult,
+            hasPositions: positionsResult.length > 0,
+            activeElection: activeElection,
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     })
     .catch((err) => {
       console.log(err);
@@ -45,20 +62,36 @@ export const postCreate = (req, res) => {
 export const getEdit = (req, res) => {
   const id = req.params.positionId;
 
-  Position.findOne({ where: { id: id } })
+  Election.findAll()
     .then((result) => {
-      const position = result.dataValues;
+      const electionsResult = result.map((result) => result.dataValues);
+      let activeElection = false;
 
-      if (!position) {
-        return res.redirect("/positions");
-      }
-
-      res.render("admin/position/save", {
-        pageTitle: "Create Position",
-        position: position,
-        positionsActive: true,
-        editMode: true,
+      electionsResult.forEach((election) => {
+        if (election.status) {
+          activeElection = election.status;
+        }
       });
+
+      Position.findOne({ where: { id: id } })
+        .then((result) => {
+          const position = result.dataValues;
+
+          if (!position) {
+            return res.redirect("/positions");
+          }
+
+          res.render("admin/position/save", {
+            pageTitle: "Edit Position",
+            position: position,
+            positionsActive: true,
+            editMode: true,
+            activeElection: activeElection,
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     })
     .catch((err) => {
       console.log(err);

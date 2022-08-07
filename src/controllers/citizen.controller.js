@@ -1,16 +1,33 @@
 import Citizen from "../models/citizen.model.js";
+import Election from "../models/election.model.js";
 
 export const getIndex = (req, res) => {
-  Citizen.findAll()
+  Election.findAll()
     .then((result) => {
-      const citizensResult = result.map((result) => result.dataValues);
+      const electionsResult = result.map((result) => result.dataValues);
+      let activeElection = false;
 
-      res.render("admin/citizen/index", {
-        pageTitle: "Citizens",
-        citizensActive: true,
-        citizens: citizensResult,
-        hasCitizens: citizensResult.length > 0,
+      electionsResult.forEach((election) => {
+        if (election.status) {
+          activeElection = election.status;
+        }
       });
+
+      Citizen.findAll()
+        .then((result) => {
+          const citizensResult = result.map((result) => result.dataValues);
+
+          res.render("admin/citizen/index", {
+            pageTitle: "Citizens",
+            citizensActive: true,
+            citizens: citizensResult,
+            hasCitizens: citizensResult.length > 0,
+            activeElection: activeElection,
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     })
     .catch((err) => {
       console.log(err);
@@ -49,20 +66,36 @@ export const postCreate = (req, res) => {
 export const getEdit = (req, res) => {
   const id = req.params.citizenId;
 
-  Citizen.findOne({ where: { id: id } })
+  Election.findAll()
     .then((result) => {
-      const citizen = result.dataValues;
+      const electionsResult = result.map((result) => result.dataValues);
+      let activeElection = false;
 
-      if (!citizen) {
-        return res.redirect("/citizens");
-      }
-
-      res.render("admin/citizen/save", {
-        pageTitle: "Create Citizen",
-        citizen: citizen,
-        citizensActive: true,
-        editMode: true,
+      electionsResult.forEach((election) => {
+        if (election.status) {
+          activeElection = election.status;
+        }
       });
+
+      Citizen.findOne({ where: { id: id } })
+        .then((result) => {
+          const citizen = result.dataValues;
+
+          if (!citizen) {
+            return res.redirect("/citizens");
+          }
+
+          res.render("admin/citizen/save", {
+            pageTitle: "Edit Citizen",
+            citizen: citizen,
+            citizensActive: true,
+            editMode: true,
+            activeElection: activeElection,
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     })
     .catch((err) => {
       console.log(err);
