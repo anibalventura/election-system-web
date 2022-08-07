@@ -21,15 +21,4 @@ positionRoutes.get(
 );
 positionRoutes.post(`${basePath}/edit`, positionController.postEdit);
 
-positionRoutes.get(
-  `${basePath}/delete/:positionId`,
-  isAuth,
-  positionController.getDelete
-);
-positionRoutes.post(
-  `${basePath}/delete`,
-  isAuth,
-  positionController.postDelete
-);
-
 export default positionRoutes;

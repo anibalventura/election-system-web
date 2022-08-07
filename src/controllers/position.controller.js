@@ -86,37 +86,3 @@ export const postEdit = (req, res) => {
       console.log(err);
     });
 };
-
-export const getDelete = (req, res) => {
-  const id = req.params.positionId;
-
-  Position.findOne({ where: { id: id } })
-    .then((result) => {
-      const position = result.dataValues;
-
-      if (!position) {
-        return res.redirect("/positions");
-      }
-
-      res.render("position/delete", {
-        pageTitle: "Delete Position",
-        position: position,
-        positionsActive: true,
-      });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};
-
-export const postDelete = (req, res) => {
-  const id = req.body.positionId;
-
-  Position.destroy({ where: { id: id } })
-    .then(() => {
-      return res.redirect("/positions");
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};

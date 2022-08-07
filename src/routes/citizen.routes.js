@@ -17,11 +17,4 @@ citizenRoutes.get(
 );
 citizenRoutes.post(`${basePath}/edit`, citizenController.postEdit);
 
-citizenRoutes.get(
-  `${basePath}/delete/:citizenId`,
-  isAuth,
-  citizenController.getDelete
-);
-citizenRoutes.post(`${basePath}/delete`, isAuth, citizenController.postDelete);
-
 export default citizenRoutes;

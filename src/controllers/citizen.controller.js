@@ -94,37 +94,3 @@ export const postEdit = (req, res) => {
       console.log(err);
     });
 };
-
-export const getDelete = (req, res) => {
-  const id = req.params.citizenId;
-
-  Citizen.findOne({ where: { id: id } })
-    .then((result) => {
-      const citizen = result.dataValues;
-
-      if (!citizen) {
-        return res.redirect("/citizens");
-      }
-
-      res.render("citizen/delete", {
-        pageTitle: "Delete Citizen",
-        citizen: citizen,
-        citizensActive: true,
-      });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};
-
-export const postDelete = (req, res) => {
-  const id = req.body.citizenId;
-
-  Citizen.destroy({ where: { id: id } })
-    .then(() => {
-      return res.redirect("/citizens");
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};

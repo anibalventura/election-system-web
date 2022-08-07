@@ -13,11 +13,4 @@ partyRoutes.post(`${basePath}/create`, isAuth, partyController.postCreate);
 partyRoutes.get(`${basePath}/edit/:partyId`, isAuth, partyController.getEdit);
 partyRoutes.post(`${basePath}/edit`, partyController.postEdit);
 
-partyRoutes.get(
-  `${basePath}/delete/:partyId`,
-  isAuth,
-  partyController.getDelete
-);
-partyRoutes.post(`${basePath}/delete`, isAuth, partyController.postDelete);
-
 export default partyRoutes;

@@ -184,37 +184,3 @@ export const postEdit = (req, res) => {
       console.log(err);
     });
 };
-
-export const getDelete = (req, res) => {
-  const id = req.params.candidateId;
-
-  Candidate.findOne({ where: { id: id } })
-    .then((result) => {
-      const candidate = result.dataValues;
-
-      if (!candidate) {
-        return res.redirect("/candidates");
-      }
-
-      res.render("candidate/delete", {
-        pageTitle: "Delete Candidate",
-        candidate: candidate,
-        candidatesActive: true,
-      });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};
-
-export const postDelete = (req, res) => {
-  const id = req.body.candidateId;
-
-  Candidate.destroy({ where: { id: id } })
-    .then(() => {
-      return res.redirect("/candidates");
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};

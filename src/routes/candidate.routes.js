@@ -25,15 +25,4 @@ candidateRoutes.get(
 );
 candidateRoutes.post(`${basePath}/edit`, candidateController.postEdit);
 
-candidateRoutes.get(
-  `${basePath}/delete/:candidateId`,
-  isAuth,
-  candidateController.getDelete
-);
-candidateRoutes.post(
-  `${basePath}/delete`,
-  isAuth,
-  candidateController.postDelete
-);
-
 export default candidateRoutes;

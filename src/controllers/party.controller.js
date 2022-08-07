@@ -104,37 +104,3 @@ export const postEdit = (req, res) => {
       console.log(err);
     });
 };
-
-export const getDelete = (req, res) => {
-  const id = req.params.partyId;
-
-  Party.findOne({ where: { id: id } })
-    .then((result) => {
-      const party = result.dataValues;
-
-      if (!party) {
-        return res.redirect("/parties");
-      }
-
-      res.render("party/delete", {
-        pageTitle: "Delete Party",
-        party: party,
-        partiesActive: true,
-      });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};
-
-export const postDelete = (req, res) => {
-  const id = req.body.partyId;
-
-  Party.destroy({ where: { id: id } })
-    .then(() => {
-      return res.redirect("/parties");
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};
