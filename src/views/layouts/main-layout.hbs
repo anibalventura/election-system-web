@@ -29,7 +29,7 @@
               <a class="nav-link {{#if citizensActive}}active{{/if}}" aria-current="page" href="/citizens">Citizens</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link {{#if electionActive}}active{{/if}}" aria-current="page" href="/election">Elections</a>
+              <a class="nav-link {{#if electionsActive}}active{{/if}}" aria-current="page" href="/elections">Elections</a>
             </li>
           {{else}}
           {{/if}}
@@ -37,8 +37,8 @@
         <ul class="navbar-nav row align-items-end mx-2">
           <li class="nav-item">
             {{#if isAuth}}
-              <form method="post" action="/auth/logout">
-                <button class="btn btn-link m-0 p-0 mt-2 text-decoration-none text-danger" type="submit">Logout</button>
+              <form class="mx-0 my-0" method="post" action="/auth/logout">
+                <button class="btn btn-link text-decoration-none text-danger" type="submit">Logout</button>
               </form>
             {{else}}
               <a class="nav-link {{#if loginActive}}active{{/if}}" aria-current="page" href="/auth/login">Login</a>

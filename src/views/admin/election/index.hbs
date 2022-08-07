@@ -1,0 +1,73 @@
+<main>
+  <div class="row justify-content-center mb-4">
+    <div class="col-11">
+      <div class="card shadow-sm">
+        <div class="card-header bg-primary bg-opacity-75">
+          <h3 class="text-white">
+            Elections Maintenance
+            {{#if activeElection}}{{else}}
+              <a
+                class="btn btn-success shadow-sm"
+                href="/elections/create"
+              >Create</a>
+            {{/if}}
+          </h3>
+
+        </div>
+        {{#if hasElections}}
+          <div class="card-body">
+            <table class="table table-striped table-hover">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {{#each elections as |election|}}
+                  <tr>
+                    <th scope="row">{{election.id}}</th>
+                    <td>{{election.name}}</td>
+                    <td>{{election.date}}</td>
+                    <td>{{#if
+                        election.status
+                      }}Active{{else}}Inactive{{/if}}</td>
+                    <td>
+                      <div class="btn-group">
+                        {{#if election.status}}
+                          <form class="mx-0 my-0">
+                            <button
+                              class="btn btn-sm btn-outline-danger"
+                              type="submit"
+                              formaction="/elections/finalize/{{election.id}}"
+                            >Finalize</button>
+                          </form>
+                        {{else}}
+                          <form class="mx-0 my-0">
+                            <button
+                              class="btn btn-sm btn-outline-info"
+                              type="submit"
+                              formaction="/elections/results/{{election.id}}"
+                            >Results</button>
+                          </form>
+                        {{/if}}
+                      </div>
+                    </td>
+                  </tr>
+                {{/each}}
+              </tbody>
+            </table>
+          </div>
+        {{else}}
+          <div class="container-fluid text-center m-5">
+            <h4>No Elections created!</h4>
+            <p>Start creating one.</p>
+          </div>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+</main>

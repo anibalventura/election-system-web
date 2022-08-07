@@ -13,7 +13,7 @@ const Election = database.define("elections", {
     allowNull: false,
   },
   date: {
-    type: Sequelize.DATE,
+    type: Sequelize.STRING,
     allowNull: false,
   },
   status: {
