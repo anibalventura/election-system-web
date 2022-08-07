@@ -20,7 +20,7 @@ const Candidate = database.define("candidate", {
     type: Sequelize.STRING,
     allowNull: true,
   },
-  state: {
+  status: {
     type: Sequelize.BOOLEAN,
     allowNull: false,
   },

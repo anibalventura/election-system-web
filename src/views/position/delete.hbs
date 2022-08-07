@@ -1,0 +1,24 @@
+<div class="row justify-content-center mb-4">
+  <div class="col-4">
+    <div class="card shadow-sm">
+      <div class="card-header bg-danger text-light">
+        <h4>Are you sure you want to delete the position
+          {{position.name}}?</h4>
+      </div>
+      <div class="card-body">
+        <form method="post" action="/positions/delete">
+
+          <input type="hidden" name="positionId" value="{{position.id}}" />
+
+          <div class="container-fluid text-center">
+            <button
+              type="submit"
+              class="btn btn-primary shadow-sm"
+            >Delete</button>
+            <a href="/positions" class="btn btn-secondary shadow-sm">Cancel</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

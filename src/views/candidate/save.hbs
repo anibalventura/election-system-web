@@ -1,0 +1,118 @@
+<main>
+    <div class="row justify-content-center mb-4">
+        <div class="col-{{#if editMode}}7{{else}}5{{/if}}">
+            {{#if hasRelations}}
+            <div class="card shadow-sm">
+                <div class="card-header {{#if editMode}}bg-warning{{else}}bg-success{{/if}} text-light">
+                    <h4>{{#if editMode}}Edit Candidate{{else}}Create a Candidate{{/if}}</h4>
+                </div>
+                <div class="card-body">
+                    <form enctype="multipart/form-data" method="post"
+                        action="/candidates/{{#if editMode}}edit{{else}}create{{/if}}">
+
+                        <div class="row">
+                            {{#if editMode}}
+                                <div class="col">
+                                    <input type="hidden" name="candidateId" value="{{candidate.id}}">
+
+                                    <div class="form-group row mb-3">
+                                        <div class="container-fluid text-center">
+                                            <img src="{{candidate.profilePicture}}" class="img-fluid img-thumbnail" width="300px" alt="{{candidate.name}}">
+                                        </div>
+                                    </div>
+                                </div>
+                            {{/if}}
+                            <div class="col">
+                                <div class="form-group row mb-3">
+                                    <div class="col">
+                                        <label for="name" class="form-label"><strong>Name:</strong></label>
+                                        <input required type="text" id="name" name="name"
+                                            placeholder="Enter a name..." class="form-control shadow-sm"
+                                            value="{{#if editMode}}{{candidate.name}}{{/if}}" />
+                                    </div>
+
+                                    <div class="col">
+                                        <label for="lastName" class="form-label"><strong>Last Name:</strong></label>
+                                        <input required type="text" id="lastName" name="lastName"
+                                            placeholder="Enter a last name..." class="form-control shadow-sm"
+                                            value="{{#if editMode}}{{candidate.lastName}}{{/if}}" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group row mb-3">
+                                    <div class="col">
+                                        <label for="imageFile" class="form-label"><strong>Select a
+                                                profile picture</strong></label>
+                                        <input {{#if editMode}}{{else}}required{{/if}} type="file" class="form-control" id="imageFile" name="image" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group row mb-3">
+                                    <div class="col">
+                                        <label for="party" class="form-label"><strong>Party:</strong></label>
+                                        <select required id="party" name="partyId" class="form-select shadow-sm">
+                                            <option value="" {{#if editMode}}{{else}}selected{{/if}}>Select an option
+                                            </option>
+
+                                            {{#each parties as |party|}}
+                                            {{#if (equalValue party.id ../candidate.partyId )}}
+                                            <option selected value="{{party.id}}">{{party.name}}</option>
+                                            {{else}}
+                                            <option value="{{party.id}}">{{party.name}}</option>
+                                            {{/if}}
+                                            {{/each}}
+                                        </select>
+                                    </div>
+
+                                    <div class="col">
+                                        <label for="position" class="form-label"><strong>Position:</strong></label>
+                                        <select required id="position" name="positionId"
+                                            class="form-select shadow-sm">
+                                            <option value="" {{#if editMode}}{{else}}selected{{/if}}>Select an option
+                                            </option>
+
+                                            {{#each positions as |position|}}
+                                            {{#if (equalValue position.id ../candidate.positionId )}}
+                                            <option selected value="{{position.id}}">{{position.name}}</option>
+                                            {{else}}
+                                            <option value="{{position.id}}">{{position.name}}</option>
+                                            {{/if}}
+                                            {{/each}}
+                                        </select>
+                                    </div>
+                                </div>
+
+                                {{#if editMode}}
+                                    <div class="form-group row mb-3">
+                                        <div class="col">
+                                        <input {{#if candidate.status}}checked{{else}}{{/if}} class="form-check-input" type="checkbox"
+                                            value="{{candidate.status}}" id="status" name="status">
+                                        <label class="form-check-label" for="status">
+                                            <strong>Active</strong>
+                                        </label>
+                                        </div>
+                                    </div>
+                                {{/if}}
+
+                                <div class="container-fluid text-center mt-4">
+                                    <button type="submit" class="btn btn-primary shadow-sm">Save</button>
+                                    <a href="/candidates" class="btn btn-secondary shadow-sm">Cancel</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            {{else}}
+            <div class="container-fluid text-center m-5">
+                {{#if hasParties}}
+                <h4>No Parties created!</h4>
+                {{/if}}
+                {{#if hasPositions}}
+                <h4>No Positions created!</h4>
+                {{/if}}
+            </div>
+            {{/if}}
+        </div>
+    </div>
+</main>

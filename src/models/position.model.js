@@ -1,7 +1,7 @@
 import Sequelize from "sequelize";
 import database from "../helpers/database.helper.js";
 
-const ElectivePosition = database.define("electivePosition", {
+const Position = database.define("position", {
   id: {
     type: Sequelize.INTEGER,
     primaryKey: true,
@@ -16,10 +16,10 @@ const ElectivePosition = database.define("electivePosition", {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  state: {
+  status: {
     type: Sequelize.BOOLEAN,
     allowNull: false,
   },
 });
 
-export default ElectivePosition;
+export default Position;

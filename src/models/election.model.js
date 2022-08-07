@@ -16,7 +16,7 @@ const Election = database.define("election", {
     type: Sequelize.DATE,
     allowNull: false,
   },
-  state: {
+  status: {
     type: Sequelize.BOOLEAN,
     allowNull: false,
   },

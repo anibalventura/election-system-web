@@ -15,6 +15,10 @@ import authRoutes from "./routes/auth.routes.js";
 import adminRoutes from "./routes/admin.routes.js";
 import errors from "./middleware/errors.middleware.js";
 import homeRoutes from "./routes/home.routes.js";
+import positionRoutes from "./routes/position.routes.js";
+import citizenRoutes from "./routes/citizen.routes.js";
+import partyRoutes from "./routes/party.routes.js";
+import candidateRoutes from "./routes/candidate.routes.js";
 
 const PORT = process.env.PORT || 5001;
 const app = express();
@@ -49,6 +53,10 @@ app.use(errors);
 app.use(homeRoutes);
 app.use(authRoutes);
 app.use(adminRoutes);
+app.use(candidateRoutes);
+app.use(partyRoutes);
+app.use(positionRoutes);
+app.use(citizenRoutes);
 app.use(errorRoutes);
 
 // Database relationships.

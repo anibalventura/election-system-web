@@ -1,0 +1,64 @@
+<main>
+  <div class="row justify-content-center mb-4">
+    <div class="col-11">
+      <div class="card shadow-sm">
+        <div class="card-header bg-primary bg-opacity-75">
+          <h3 class="text-white">
+            Citizens Maintenance
+            <a
+              class="btn btn-success shadow-sm"
+              href="/citizens/create"
+            >Create</a>
+          </h3>
+
+        </div>
+        {{#if hasCitizens}}
+          <div class="card-body">
+            <table class="table table-striped table-hover">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Last Name</th>
+                  <th scope="col">Identification Document</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {{#each citizens as |citizen|}}
+                  <tr>
+                    <th scope="row">{{citizen.id}}</th>
+                    <td>{{citizen.name}}</td>
+                    <td>{{citizen.lastName}}</td>
+                    <td>{{citizen.identificationDocument}}</td>
+                    <td>{{citizen.email}}</td>
+                    <td>{{#if citizen.status}}Active{{else}}Inactive{{/if}}</td>
+                    <td>
+                      <div class="btn-group mx-0">
+                        <a
+                          href="/citizens/edit/{{citizen.id}}"
+                          class="btn btn-sm btn-outline-warning"
+                        >Edit</a>
+                        <a
+                          href="/citizens/delete/{{citizen.id}}"
+                          class="btn btn-sm btn-outline-danger"
+                        >Delete</a>
+                      </div>
+                    </td>
+                  </tr>
+                {{/each}}
+              </tbody>
+            </table>
+          </div>
+        {{else}}
+          <div class="container-fluid text-center m-5">
+            <h4>No Citizens created!</h4>
+            <p>Start creating one.</p>
+          </div>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+</main>

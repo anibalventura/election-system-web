@@ -1,0 +1,71 @@
+<main>
+  <div class="row justify-content-center mb-4">
+    <div class="col-{{#if editMode}}7{{else}}5{{/if}}">
+      <div class="card shadow-sm">
+        <div class="card-header {{#if editMode}}bg-warning{{else}}bg-success{{/if}} text-light">
+          <h4>{{#if editMode}}Edit Party{{else}}Create a Party{{/if}}</h4>
+        </div>
+        <div class="card-body">
+          <form enctype="multipart/form-data" method="post"
+            action="/parties/{{#if editMode}}edit{{else}}create{{/if}}">
+            <div class="row">
+              {{#if editMode}}
+                <div class="col">
+                  <input type="hidden" name="partyId" value="{{party.id}}">
+
+                  <div class="form-group row mb-3">
+                    <div class="container-fluid text-center">
+                      <img src="{{party.logo}}" class="img-fluid img-thumbnail" width="300px" alt="{{party.title}}">
+                    </div>
+                  </div>
+                </div>
+              {{/if}}
+              <div class="col">
+                <div class="form-group row mb-3">
+                  <div class="col">
+                    <label for="name" class="form-label"><strong>Title:</strong></label>
+                    <input required type="text" id="name" name="name" placeholder="Enter a name..."
+                      class="form-control shadow-sm" value="{{#if editMode}}{{party.name}}{{/if}}" />
+                  </div>
+                </div>
+
+                <div class="form-group row mb-3">
+                  <div class="col">
+                    <label for="imageFile" class="form-label"><strong>Select a logo:</strong></label>
+                    <input {{#if editMode}}{{else}}required{{/if}} type="file" class="form-control" id="imageFile"
+                      name="image" />
+                  </div>
+                </div>
+
+                <div class="form-group row mb-3">
+                  <div class="col">
+                    <label for="description" class="form-label"><strong>Description:</strong></label>
+                    <textarea required id="description" name="description" placeholder="Enter a description..." rows="5"
+                      class="form-control shadow-sm">{{#if editMode}}{{party.description}}{{/if}}</textarea>
+                  </div>
+                </div>
+
+                {{#if editMode}}
+                  <div class="form-group row mb-3">
+                    <div class="col">
+                      <input {{#if party.status}}checked{{else}}{{/if}} class="form-check-input" type="checkbox"
+                        value="{{party.status}}" id="status" name="status">
+                      <label class="form-check-label" for="status">
+                        <strong>Active</strong>
+                      </label>
+                    </div>
+                  </div>
+                {{/if}}
+
+                <div class="container-fluid text-center mt-4">
+                  <button type="submit" class="btn btn-primary shadow-sm">Save</button>
+                  <a href="/parties" class="btn btn-secondary shadow-sm">Cancel</a>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

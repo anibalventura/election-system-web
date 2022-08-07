@@ -20,7 +20,7 @@ const Party = database.define("party", {
     type: Sequelize.STRING,
     allowNull: true,
   },
-  state: {
+  status: {
     type: Sequelize.BOOLEAN,
     allowNull: false,
   },
