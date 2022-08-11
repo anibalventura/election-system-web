@@ -34,17 +34,20 @@
           {{else}}
           {{/if}}
         </ul>
-        <ul class="navbar-nav row align-items-end mx-2">
-          <li class="nav-item">
-            {{#if isAuth}}
-              <form class="mx-0 my-0" method="post" action="/auth/logout">
-                <button class="btn btn-link text-decoration-none text-danger" type="submit">Logout</button>
-              </form>
-            {{else}}
-              <a class="nav-link {{#if loginActive}}active{{/if}}" aria-current="page" href="/auth/login">Login</a>
-            {{/if}}
-          </li>
-        </ul>
+        {{#if voteActive}}
+        {{else}}
+          <ul class="navbar-nav row align-items-end mx-2">
+            <li class="nav-item">
+              {{#if isAuth}}
+                <form class="mx-0 my-0" method="post" action="/auth/logout">
+                  <button class="btn btn-link text-decoration-none text-danger" type="submit">Logout</button>
+                </form>
+              {{else}}
+                <a class="nav-link {{#if loginActive}}active{{/if}}" aria-current="page" href="/auth/login">Login</a>
+              {{/if}}
+            </li>
+          </ul>
+        {{/if}}
       </div>
     </nav>
   </header>

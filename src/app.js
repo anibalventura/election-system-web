@@ -15,6 +15,7 @@ import authRoutes from "./routes/auth.routes.js";
 import adminRoutes from "./routes/admin.routes.js";
 import errors from "./middleware/errors.middleware.js";
 import homeRoutes from "./routes/home.routes.js";
+import voteRoutes from "./routes/vote.routes.js";
 import positionRoutes from "./routes/position.routes.js";
 import citizenRoutes from "./routes/citizen.routes.js";
 import partyRoutes from "./routes/party.routes.js";
@@ -52,6 +53,7 @@ app.use(errors);
 
 // Routes.
 app.use(homeRoutes);
+app.use(voteRoutes);
 app.use(authRoutes);
 app.use(adminRoutes);
 app.use(candidateRoutes);

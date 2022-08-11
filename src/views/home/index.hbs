@@ -1,8 +1,43 @@
 <main>
-  <div class="px-4 py-5 my-5 text-center">
+  <div class="px-4 py-2 my-5 text-center">
     <h1 class="display-5 fw-bold">Welcome to Election System!</h1>
     <div class="col-lg-6 mx-auto">
       <p class="lead mb-4">Enter your identification bellow to start voting!</p>
     </div>
   </div>
+  <main>
+    <div class="row justify-content-center mb-4">
+      <div class="col-3">
+        <div class="card shadow-sm">
+          <div class="card-header bg-primary text-light">
+            <h4>Enter your Identification Number</h4>
+          </div>
+          <div class="card-body">
+            <form method="post" action="/home/vote">
+              <div class="form-group row mb-3">
+                <div class="col">
+                  <label for="name" class="form-label"><strong>Citizen ID:</strong></label>
+                  <input
+                    required
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Ex. 000-0000000-0"
+                    class="form-control shadow-sm"
+                  />
+                </div>
+              </div>
+
+              <div class="container-fluid text-center mt-4">
+                <button
+                  type="submit"
+                  class="btn btn-primary shadow-sm"
+                >Vote</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
 </main>
