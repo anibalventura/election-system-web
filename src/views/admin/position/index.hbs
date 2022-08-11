@@ -7,14 +7,12 @@
             <h3 class="col text-white">
               Positions Maintenance
             </h3>
-            {{#if activeElection}}{{else}}
               <div class="col d-flex justify-content-end">
                 <a
-                  class="btn btn-success shadow-sm"
+                  class="btn btn-success shadow-sm {{#if activeElection}}disabled{{/if}}"
                   href="/positions/create"
                 >Create</a>
               </div>
-            {{/if}}
           </div>
         </div>
         {{#if hasPositions}}

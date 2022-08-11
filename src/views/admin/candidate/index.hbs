@@ -7,15 +7,12 @@
             <h3 class="col text-white">
               Candidates Maintenance
             </h3>
-
-            {{#if activeElection}}{{else}}
-              <div class="col d-flex justify-content-end">
-                <a
-                  class="btn btn-success shadow-sm"
-                  href="/candidates/create"
-                >Create</a>
-              </div>
-            {{/if}}
+            <div class="col d-flex justify-content-end">
+              <a
+                class="btn btn-success shadow-sm {{#if activeElection}}disabled{{/if}}"
+                href="/candidates/create"
+              >Create</a>
+            </div>
           </div>
         </div>
         {{#if hasCandidates}}

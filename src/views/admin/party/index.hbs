@@ -7,71 +7,52 @@
             <h3 class="col text-white">
               Parties Maintenance
             </h3>
-
-            {{#if activeElection}}{{else}}
-              <div class="col d-flex justify-content-end">
-                <a
-                  class="btn btn-success shadow-sm"
-                  href="/parties/create"
-                >Create</a>
-              </div>
-            {{/if}}
+            <div class="col d-flex justify-content-end">
+              <a class="btn btn-success shadow-sm {{#if activeElection}}disabled{{/if}}"
+                href="/parties/create">Create</a>
+            </div>
           </div>
         </div>
         {{#if hasParties}}
-          <div class="card-body">
-            <div class="row">
+        <div class="card-body">
+          <div class="row">
 
-              {{#each parties as |party|}}
-                <div class="col-3 mb-3">
-                  <div class="card shadow-sm h-100">
-                    <div class="text-center mt-3">
-                      <img
-                        src="{{party.logo}}"
-                        alt="{{party.name}}"
-                        class="img-thumbnail img-fluid h-100"
-                        width="200px"
-                      />
+            {{#each parties as |party|}}
+            <div class="col-3 mb-3">
+              <div class="card shadow-sm h-100">
+                <div class="text-center mt-3">
+                  <img src="{{party.logo}}" alt="{{party.name}}" class="img-thumbnail img-fluid h-100" width="200px" />
+                </div>
+                <div class="card-body">
+                  <h4>{{party.name}}</h4>
+                  <div>
+                    <div>
+                      <label class="card-subtitle text-muted">Description:</label>
+                      <span class="">{{party.description}}</span>
                     </div>
-                    <div class="card-body">
-                      <h4>{{party.name}}</h4>
-                      <div>
-                        <div>
-                          <label
-                            class="card-subtitle text-muted"
-                          >Description:</label>
-                          <span class="">{{party.description}}</span>
-                        </div>
-                        <div>
-                          <label
-                            class="card-subtitle text-muted"
-                          >Status:</label>
-                          <span class="">{{#if
-                              party.status
-                            }}Active{{else}}Inactive{{/if}}</span>
-                        </div>
-                        <div
-                          class="mt-3 d-flex justify-content-between align-items-center"
-                        >
-                          <div class="btn-group">
-                            <a
-                              href="/parties/edit/{{party.id}}"
-                              class="btn btn-sm btn-outline-warning"
-                            >Edit</a>
-                          </div>
-                        </div>
+                    <div>
+                      <label class="card-subtitle text-muted">Status:</label>
+                      <span class="">{{#if
+                        party.status
+                        }}Active{{else}}Inactive{{/if}}</span>
+                    </div>
+                    <div class="mt-3 d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <a href="/parties/edit/{{party.id}}" class="btn btn-sm btn-outline-warning">Edit</a>
                       </div>
                     </div>
                   </div>
                 </div>
-              {{/each}}
+              </div>
             </div>
+            {{/each}}
           </div>
+        </div>
         {{else}}
-          <div class="container-fluid text-center m-5">
-            <h4>No Parties created!</h4>
-            <p>Start creating one.</p>
-          </div>
+        <div class="container-fluid text-center m-5">
+          <h4>No Parties created!</h4>
+          <p>Start creating one.</p>
+        </div>
         {{/if}}
       </div>
     </div>

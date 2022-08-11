@@ -71,8 +71,6 @@
             </div>
 
             {{#if editMode}}
-              {{#if activeElection}}
-              {{else}}
                 <div class="form-group row mb-3">
                   <div class="col">
                     <input
@@ -82,13 +80,13 @@
                       value="{{citizen.status}}"
                       id="status"
                       name="status"
+                      {{#if activeElection}}disabled{{/if}}
                     >
                     <label class="form-check-label" for="status">
                       <strong>Active</strong>
                     </label>
                   </div>
                 </div>
-              {{/if}}
             {{/if}}
 
             <div class="container-fluid text-center mt-4">
