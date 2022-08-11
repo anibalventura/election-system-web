@@ -1,5 +1,6 @@
 import Party from "../models/party.model.js";
 import Election from "../models/election.model.js";
+import Candidate from "../models/candidate.model.js";
 
 export const getIndex = (req, res) => {
   Party.findAll()
@@ -131,6 +132,26 @@ export const postEdit = (req, res) => {
         { where: { id: id } }
       )
         .then(() => {
+          if (!status) {
+            Candidate.findAll()
+              .then((result) => {
+                const candidatesResult = result.map(
+                  (result) => result.dataValues
+                );
+                candidatesResult.forEach((candidate) => {
+                  Candidate.update(
+                    {
+                      status: false,
+                    },
+                    { where: { id: candidate.id, partyId: id } }
+                  );
+                });
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+          }
+
           return res.redirect("/parties");
         })
         .catch((err) => {
