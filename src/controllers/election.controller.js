@@ -1,6 +1,24 @@
 import Election from "../models/election.model.js";
+import Candidate from "../models/candidate.model.js";
 
 export const getIndex = (req, res) => {
+  Election.findAll({ order: [["id", "DESC"]] })
+    .then((result) => {
+      const electionsResult = result.map((result) => result.dataValues);
+
+      res.render("admin/election/index", {
+        pageTitle: "Elections",
+        electionsActive: true,
+        elections: electionsResult,
+        hasElections: electionsResult.length > 0,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+export const getCreate = (req, res) => {
   Election.findAll({ order: [["id", "DESC"]] })
     .then((result) => {
       const electionsResult = result.map((result) => result.dataValues);
@@ -12,25 +30,44 @@ export const getIndex = (req, res) => {
         }
       });
 
-      res.render("admin/election/index", {
-        pageTitle: "Elections",
-        electionsActive: true,
-        activeElection: activeElection,
-        elections: electionsResult,
-        hasElections: electionsResult.length > 0,
-      });
+      if (!activeElection) {
+        Candidate.findAll()
+          .then((result) => {
+            const candidatesResult = result.map((result) => result.dataValues);
+            let candidatesActive = 0;
+            let candidatesCount = candidatesResult.length;
+
+            candidatesResult.forEach((candidate) => {
+              if (candidate.status) {
+                candidatesActive++;
+              }
+            });
+
+            if (candidatesActive >= 2 && candidatesCount >= 2) {
+              res.render("admin/election/save", {
+                pageTitle: "Create Election",
+                electionsActive: true,
+                editMode: false,
+              });
+            } else {
+              req.flash(
+                "errors",
+                "Need to have two active candidates to start a election."
+              );
+              res.redirect("/elections");
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      } else {
+        req.flash("errors", "Cannot create an election on an active election.");
+        res.redirect("/elections");
+      }
     })
     .catch((err) => {
       console.log(err);
     });
-};
-
-export const getCreate = (req, res) => {
-  res.render("admin/election/save", {
-    pageTitle: "Create Election",
-    electionsActive: true,
-    editMode: false,
-  });
 };
 
 export const postCreate = (req, res) => {

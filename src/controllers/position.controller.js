@@ -2,6 +2,23 @@ import Position from "../models/position.model.js";
 import Election from "../models/election.model.js";
 
 export const getIndex = (req, res) => {
+  Position.findAll()
+    .then((result) => {
+      const positionsResult = result.map((result) => result.dataValues);
+
+      res.render("admin/position/index", {
+        pageTitle: "Positions",
+        positionsActive: true,
+        positions: positionsResult,
+        hasPositions: positionsResult.length > 0,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+export const getCreate = (req, res) => {
   Election.findAll()
     .then((result) => {
       const electionsResult = result.map((result) => result.dataValues);
@@ -13,33 +30,20 @@ export const getIndex = (req, res) => {
         }
       });
 
-      Position.findAll()
-        .then((result) => {
-          const positionsResult = result.map((result) => result.dataValues);
-
-          res.render("admin/position/index", {
-            pageTitle: "Positions",
-            positionsActive: true,
-            positions: positionsResult,
-            hasPositions: positionsResult.length > 0,
-            activeElection: activeElection,
-          });
-        })
-        .catch((err) => {
-          console.log(err);
+      if (activeElection) {
+        req.flash("errors", "Cannot create positions on an active election.");
+        res.redirect("/positions");
+      } else {
+        res.render("admin/position/save", {
+          pageTitle: "Create Position",
+          positionsActive: true,
+          editMode: false,
         });
+      }
     })
     .catch((err) => {
       console.log(err);
     });
-};
-
-export const getCreate = (req, res) => {
-  res.render("admin/position/save", {
-    pageTitle: "Create Position",
-    positionsActive: true,
-    editMode: false,
-  });
 };
 
 export const postCreate = (req, res) => {

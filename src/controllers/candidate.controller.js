@@ -34,6 +34,25 @@ const getAllPositions = () => {
 };
 
 export const getIndex = (req, res) => {
+  Candidate.findAll({
+    include: [{ model: Party }, { model: Position }],
+  })
+    .then((result) => {
+      const candidates = result.map((result) => result.dataValues);
+
+      res.render("admin/candidate/index", {
+        pageTitle: "Home",
+        candidatesActive: true,
+        candidates: candidates,
+        hasCandidates: candidates.length > 0,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+export const getCreate = (req, res) => {
   Election.findAll()
     .then((result) => {
       const electionsResult = result.map((result) => result.dataValues);
@@ -45,57 +64,44 @@ export const getIndex = (req, res) => {
         }
       });
 
-      Candidate.findAll({
-        include: [{ model: Party }, { model: Position }],
-      })
-        .then((result) => {
-          const candidates = result.map((result) => result.dataValues);
+      if (activeElection) {
+        req.flash("errors", "Cannot create candidates on an active election.");
+        res.redirect("/candidates");
+      } else {
+        Party.findAll()
+          .then((result) => {
+            parties = [];
+            const partiesResult = result.map((result) => result.dataValues);
 
-          res.render("admin/candidate/index", {
-            pageTitle: "Home",
-            candidatesActive: true,
-            candidates: candidates,
-            hasCandidates: candidates.length > 0,
-            activeElection: activeElection,
+            Position.findAll()
+              .then((result) => {
+                const positionsResult = result.map(
+                  (result) => result.dataValues
+                );
+
+                res.render("admin/candidate/save", {
+                  pageTitle: "Create Candidate",
+                  parties: partiesResult,
+                  positions: positionsResult,
+                  hasParties: partiesResult.length === 0,
+                  hasPositions: positionsResult.length === 0,
+                  hasRelations:
+                    partiesResult.length > 0 && positionsResult.length > 0,
+                  candidatesActive: true,
+                  editMode: false,
+                  helpers: {
+                    equalValue: compare,
+                  },
+                });
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+          })
+          .catch((err) => {
+            console.log(err);
           });
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};
-
-export const getCreate = (req, res) => {
-  Party.findAll()
-    .then((result) => {
-      parties = [];
-      const partiesResult = result.map((result) => result.dataValues);
-
-      Position.findAll()
-        .then((result) => {
-          const positionsResult = result.map((result) => result.dataValues);
-
-          res.render("admin/candidate/save", {
-            pageTitle: "Create Candidate",
-            parties: partiesResult,
-            positions: positionsResult,
-            hasParties: partiesResult.length === 0,
-            hasPositions: positionsResult.length === 0,
-            hasRelations:
-              partiesResult.length > 0 && positionsResult.length > 0,
-            candidatesActive: true,
-            editMode: false,
-            helpers: {
-              equalValue: compare,
-            },
-          });
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      }
     })
     .catch((err) => {
       console.log(err);

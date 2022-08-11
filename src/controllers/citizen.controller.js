@@ -2,6 +2,23 @@ import Citizen from "../models/citizen.model.js";
 import Election from "../models/election.model.js";
 
 export const getIndex = (req, res) => {
+  Citizen.findAll()
+    .then((result) => {
+      const citizensResult = result.map((result) => result.dataValues);
+
+      res.render("admin/citizen/index", {
+        pageTitle: "Citizens",
+        citizensActive: true,
+        citizens: citizensResult,
+        hasCitizens: citizensResult.length > 0,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+export const getCreate = (req, res) => {
   Election.findAll()
     .then((result) => {
       const electionsResult = result.map((result) => result.dataValues);
@@ -13,33 +30,20 @@ export const getIndex = (req, res) => {
         }
       });
 
-      Citizen.findAll()
-        .then((result) => {
-          const citizensResult = result.map((result) => result.dataValues);
-
-          res.render("admin/citizen/index", {
-            pageTitle: "Citizens",
-            citizensActive: true,
-            citizens: citizensResult,
-            hasCitizens: citizensResult.length > 0,
-            activeElection: activeElection,
-          });
-        })
-        .catch((err) => {
-          console.log(err);
+      if (activeElection) {
+        req.flash("errors", "Cannot create parties on an active election.");
+        res.redirect("/citizens");
+      } else {
+        res.render("admin/citizen/save", {
+          pageTitle: "Create Citizen",
+          citizensActive: true,
+          editMode: false,
         });
+      }
     })
     .catch((err) => {
       console.log(err);
     });
-};
-
-export const getCreate = (req, res) => {
-  res.render("admin/citizen/save", {
-    pageTitle: "Create Citizen",
-    citizensActive: true,
-    editMode: false,
-  });
 };
 
 export const postCreate = (req, res) => {
