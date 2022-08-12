@@ -16,5 +16,5 @@
 ```xml
 MIT License
 
-Copyright (c) 2022 Anibal Ventura
+Copyright (c) 2022 Anibal Ventura & Julio Peguero
 ```
