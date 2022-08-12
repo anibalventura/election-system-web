@@ -6,7 +6,7 @@
           <h4>{{#if editMode}}Edit Election{{else}}Create a Election{{/if}}</h4>
         </div>
         <div class="card-body">
-          <form method="post" action="/elections/{{#if editMode}}edit{{else}}create{{/if}}">
+          <form method="post" action="/admin/elections/{{#if editMode}}edit{{else}}create{{/if}}">
 
             {{#if editMode}}
                 <input type="hidden" name="electionId" value="{{election.id}}">
@@ -48,7 +48,7 @@
                 type="submit"
                 class="btn btn-primary shadow-sm"
                 >Save</button>
-                <a href="/elections" class="btn btn-secondary shadow-sm">Cancel</a>
+                <a href="/admin/elections" class="btn btn-secondary shadow-sm">Cancel</a>
             </div>
           </form>
         </div>

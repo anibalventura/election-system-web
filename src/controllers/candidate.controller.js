@@ -66,7 +66,7 @@ export const getCreate = (req, res) => {
 
       if (activeElection) {
         req.flash("errors", "Cannot create candidates on an active election.");
-        res.redirect("/candidates");
+        res.redirect("/admin/candidates");
       } else {
         Party.findAll()
           .then((result) => {
@@ -124,7 +124,7 @@ export const postCreate = (req, res) => {
     status: true,
   })
     .then((result) => {
-      res.redirect("/candidates");
+      res.redirect("/admin/candidates");
     })
     .catch((err) => {
       console.log(err);
@@ -153,7 +153,7 @@ export const getEdit = (req, res) => {
           const candidate = result.dataValues;
 
           if (!candidate) {
-            return res.redirect("/candidates");
+            return res.redirect("/admin/candidates");
           }
 
           res.render("admin/candidate/save", {
@@ -195,7 +195,7 @@ export const postEdit = (req, res) => {
       const candidate = result.dataValues;
 
       if (!candidate) {
-        return res.redirect("/candidates");
+        return res.redirect("/admin/candidates");
       }
 
       const profilePicture = candidateImage
@@ -214,7 +214,7 @@ export const postEdit = (req, res) => {
         { where: { id: id } }
       )
         .then(() => {
-          return res.redirect("/candidates");
+          return res.redirect("/admin/candidates");
         })
         .catch((err) => {
           console.log(err);

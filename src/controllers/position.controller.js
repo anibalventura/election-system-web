@@ -33,7 +33,7 @@ export const getCreate = (req, res) => {
 
       if (activeElection) {
         req.flash("errors", "Cannot create positions on an active election.");
-        res.redirect("/positions");
+        res.redirect("/admin/positions");
       } else {
         res.render("admin/position/save", {
           pageTitle: "Create Position",
@@ -57,7 +57,7 @@ export const postCreate = (req, res) => {
     status: true,
   })
     .then(() => {
-      res.redirect("/positions");
+      res.redirect("/admin/positions");
     })
     .catch((err) => {
       console.log(err);
@@ -83,7 +83,7 @@ export const getEdit = (req, res) => {
           const position = result.dataValues;
 
           if (!position) {
-            return res.redirect("/positions");
+            return res.redirect("/admin/positions");
           }
 
           res.render("admin/position/save", {
@@ -136,7 +136,7 @@ export const postEdit = (req, res) => {
           });
       }
 
-      return res.redirect("/positions");
+      return res.redirect("/admin/positions");
     })
     .catch((err) => {
       console.log(err);

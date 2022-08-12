@@ -6,7 +6,7 @@
           <h4>{{#if editMode}}Edit Position{{else}}Create a Position{{/if}}</h4>
         </div>
         <div class="card-body">
-          <form method="post" action="/positions/{{#if editMode}}edit{{else}}create{{/if}}">
+          <form method="post" action="/admin/positions/{{#if editMode}}edit{{else}}create{{/if}}">
 
             {{#if editMode}}
                 <input type="hidden" name="positionId" value="{{position.id}}">
@@ -67,7 +67,7 @@
                 type="submit"
                 class="btn btn-primary shadow-sm"
                 >Save</button>
-                <a href="/positions" class="btn btn-secondary shadow-sm">Cancel</a>
+                <a href="/admin/positions" class="btn btn-secondary shadow-sm">Cancel</a>
             </div>
           </form>
         </div>

@@ -2,7 +2,7 @@ import User from "../models/user.model.js";
 import bcrypt from "bcryptjs";
 
 export const getLogin = (req, res) => {
-  res.render("auth/login", {
+  res.render("home/auth/login", {
     pageTitle: "Login",
     loginActive: true,
   });
@@ -16,7 +16,7 @@ export const postLogin = (req, res) => {
     .then((user) => {
       if (!user) {
         req.flash("errors", "Username is invalid.");
-        return res.redirect("/auth/login");
+        return res.redirect("/home/auth/login");
       }
 
       bcrypt
@@ -31,7 +31,7 @@ export const postLogin = (req, res) => {
             });
           }
           req.flash("errors", "Password is invalid.");
-          res.redirect("/auth/login");
+          res.redirect("/home/auth/login");
         })
         .catch((err) => {
           console.log(err);
@@ -39,18 +39,18 @@ export const postLogin = (req, res) => {
             "errors",
             "An error has occurred contact the administrator."
           );
-          res.redirect("/auth/login");
+          res.redirect("/home/auth/login");
         });
     })
     .catch((err) => {
       console.log(err);
       req.flash("errors", "An error has occurred contact the administrator.");
-      res.redirect("/auth/login");
+      res.redirect("/home/auth/login");
     });
 };
 
 export const getRegister = (req, res) => {
-  res.render("auth/register", {
+  res.render("home/auth/register", {
     pageTitle: "Register",
     registerActive: true,
   });
@@ -66,7 +66,7 @@ export const postRegister = (req, res) => {
 
   if (password != confirmPassword) {
     req.flash("errors", "Passwords are not the same.");
-    return res.redirect("/auth/register");
+    return res.redirect("/home/auth/register");
   }
 
   User.findOne({ where: { userName: userName } })
@@ -76,7 +76,7 @@ export const postRegister = (req, res) => {
           "errors",
           "Username already exist, please use a different one."
         );
-        return res.redirect("/auth/register");
+        return res.redirect("/home/auth/register");
       }
 
       bcrypt
@@ -91,7 +91,7 @@ export const postRegister = (req, res) => {
             status: true,
           })
             .then((user) => {
-              res.redirect("/auth/login");
+              res.redirect("/home/auth/login");
             })
             .catch((err) => {
               console.log(err);

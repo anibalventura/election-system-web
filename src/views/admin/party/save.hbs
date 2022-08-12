@@ -6,7 +6,7 @@
           <h4>{{#if editMode}}Edit Party{{else}}Create a Party{{/if}}</h4>
         </div>
         <div class="card-body">
-          <form enctype="multipart/form-data" method="post" action="/parties/{{#if editMode}}edit{{else}}create{{/if}}">
+          <form enctype="multipart/form-data" method="post" action="/admin/parties/{{#if editMode}}edit{{else}}create{{/if}}">
             <div class="row">
               {{#if editMode}}
               <div class="col">
@@ -58,7 +58,7 @@
 
                 <div class="container-fluid text-center mt-4">
                   <button type="submit" class="btn btn-primary shadow-sm">Save</button>
-                  <a href="/parties" class="btn btn-secondary shadow-sm">Cancel</a>
+                  <a href="/admin/parties" class="btn btn-secondary shadow-sm">Cancel</a>
                 </div>
               </div>
             </div>

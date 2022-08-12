@@ -3,7 +3,7 @@ import * as partyController from "../controllers/party.controller.js";
 import { isAuth } from "../middleware/auth.middleware.js";
 
 const partyRoutes = express.Router();
-const basePath = "/parties";
+const basePath = "/admin/parties";
 
 partyRoutes.get(`${basePath}`, isAuth, partyController.getIndex);
 

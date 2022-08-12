@@ -32,7 +32,7 @@ export const getCreate = (req, res) => {
 
       if (activeElection) {
         req.flash("errors", "Cannot create parties on an active election.");
-        res.redirect("/citizens");
+        res.redirect("/admin/citizens");
       } else {
         res.render("admin/citizen/save", {
           pageTitle: "Create Citizen",
@@ -60,7 +60,7 @@ export const postCreate = (req, res) => {
     status: true,
   })
     .then(() => {
-      res.redirect("/citizens");
+      res.redirect("/admin/citizens");
     })
     .catch((err) => {
       console.log(err);
@@ -86,7 +86,7 @@ export const getEdit = (req, res) => {
           const citizen = result.dataValues;
 
           if (!citizen) {
-            return res.redirect("/citizens");
+            return res.redirect("/admin/citizens");
           }
 
           res.render("admin/citizen/save", {
@@ -125,7 +125,7 @@ export const postEdit = (req, res) => {
     { where: { id: id } }
   )
     .then(() => {
-      return res.redirect("/citizens");
+      return res.redirect("/admin/citizens");
     })
     .catch((err) => {
       console.log(err);

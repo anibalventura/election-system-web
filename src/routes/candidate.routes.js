@@ -3,7 +3,7 @@ import * as candidateController from "../controllers/candidate.controller.js";
 import { isAuth } from "../middleware/auth.middleware.js";
 
 const candidateRoutes = express.Router();
-const basePath = "/candidates";
+const basePath = "/admin/candidates";
 
 candidateRoutes.get(`${basePath}`, isAuth, candidateController.getIndex);
 

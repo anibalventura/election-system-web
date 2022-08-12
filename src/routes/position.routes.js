@@ -3,7 +3,7 @@ import * as positionController from "../controllers/position.controller.js";
 import { isAuth } from "../middleware/auth.middleware.js";
 
 const positionRoutes = express.Router();
-const basePath = "/positions";
+const basePath = "/admin/positions";
 
 positionRoutes.get(`${basePath}`, isAuth, positionController.getIndex);
 

@@ -3,7 +3,7 @@ import * as electionController from "../controllers/election.controller.js";
 import { isAuth } from "../middleware/auth.middleware.js";
 
 const electionRoutes = express.Router();
-const basePath = "/elections";
+const basePath = "/admin/elections";
 
 electionRoutes.get(`${basePath}`, isAuth, electionController.getIndex);
 

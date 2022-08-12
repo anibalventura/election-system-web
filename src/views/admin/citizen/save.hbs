@@ -6,7 +6,7 @@
           <h4>{{#if editMode}}Edit Citizen{{else}}Create a Citizen{{/if}}</h4>
         </div>
         <div class="card-body">
-          <form method="post" action="/citizens/{{#if editMode}}edit{{else}}create{{/if}}">
+          <form method="post" action="/admin/citizens/{{#if editMode}}edit{{else}}create{{/if}}">
 
             {{#if editMode}}
                 <input type="hidden" name="citizenId" value="{{citizen.id}}">
@@ -94,7 +94,7 @@
                 type="submit"
                 class="btn btn-primary shadow-sm"
                 >Save</button>
-                <a href="/citizens" class="btn btn-secondary shadow-sm">Cancel</a>
+                <a href="/admin/citizens" class="btn btn-secondary shadow-sm">Cancel</a>
             </div>
           </form>
         </div>

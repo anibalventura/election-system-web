@@ -33,7 +33,7 @@ export const getCreate = (req, res) => {
 
       if (activeElection) {
         req.flash("errors", "Cannot create parties on an active election.");
-        res.redirect("/parties");
+        res.redirect("/admin/parties");
       } else {
         res.render("admin/party/save", {
           pageTitle: "Create Party",
@@ -59,7 +59,7 @@ export const postCreate = (req, res) => {
     status: true,
   })
     .then(() => {
-      res.redirect("/parties");
+      res.redirect("/admin/parties");
     })
     .catch((err) => {
       console.log(err);
@@ -85,7 +85,7 @@ export const getEdit = (req, res) => {
           const party = result.dataValues;
 
           if (!party) {
-            return res.redirect("/parties");
+            return res.redirect("/admin/parties");
           }
 
           res.render("admin/party/save", {
@@ -117,7 +117,7 @@ export const postEdit = (req, res) => {
       const party = result.dataValues;
 
       if (!party) {
-        return res.redirect("/parties");
+        return res.redirect("/admin/parties");
       }
 
       const logoPath = logo ? `/${logo.path}` : party.logo;
@@ -152,7 +152,7 @@ export const postEdit = (req, res) => {
               });
           }
 
-          return res.redirect("/parties");
+          return res.redirect("/admin/parties");
         })
         .catch((err) => {
           console.log(err);

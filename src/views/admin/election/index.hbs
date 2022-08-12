@@ -10,7 +10,7 @@
             <div class="col d-flex justify-content-end">
               <a
                 class="btn btn-success shadow-sm"
-                href="/elections/create"
+                href="/admin/elections/create"
               >Create</a>
             </div>
           </div>
@@ -43,7 +43,7 @@
                             <button
                               class="btn btn-sm btn-outline-danger"
                               type="submit"
-                              formaction="/elections/finalize/{{election.id}}"
+                              formaction="/admin/elections/finalize/{{election.id}}"
                             >Finalize</button>
                           </form>
                         {{else}}
@@ -51,7 +51,7 @@
                             <button
                               class="btn btn-sm btn-outline-info"
                               type="submit"
-                              formaction="/elections/results/{{election.id}}"
+                              formaction="/admin/elections/results/{{election.id}}"
                             >Results</button>
                           </form>
                         {{/if}}

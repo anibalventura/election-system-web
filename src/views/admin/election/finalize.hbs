@@ -6,7 +6,7 @@
           {{election.name}}?</h4>
       </div>
       <div class="card-body">
-        <form method="post" action="/elections/finalize">
+        <form method="post" action="/admin/elections/finalize">
 
           <input type="hidden" name="electionId" value="{{election.id}}" />
 
@@ -15,7 +15,10 @@
               type="submit"
               class="btn btn-primary shadow-sm"
             >Finalize</button>
-            <a href="/elections" class="btn btn-secondary shadow-sm">Cancel</a>
+            <a
+              href="/admin/elections"
+              class="btn btn-secondary shadow-sm"
+            >Cancel</a>
           </div>
         </form>
       </div>

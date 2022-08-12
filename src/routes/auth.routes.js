@@ -2,7 +2,7 @@ import express from "express";
 import * as authController from "../controllers/auth.controller.js";
 
 const authRoutes = express.Router();
-const basePath = "/auth";
+const basePath = "/home/auth";
 
 authRoutes.get(`${basePath}/login`, authController.getLogin);
 authRoutes.post(`${basePath}/login`, authController.postLogin);

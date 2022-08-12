@@ -8,7 +8,7 @@
                 </div>
                 <div class="card-body">
                     <form enctype="multipart/form-data" method="post"
-                        action="/candidates/{{#if editMode}}edit{{else}}create{{/if}}">
+                        action="/admin/candidates/{{#if editMode}}edit{{else}}create{{/if}}">
 
                         <div class="row">
                             {{#if editMode}}
@@ -96,7 +96,7 @@
 
                                 <div class="container-fluid text-center mt-4">
                                     <button type="submit" class="btn btn-primary shadow-sm">Save</button>
-                                    <a href="/candidates" class="btn btn-secondary shadow-sm">Cancel</a>
+                                    <a href="/admin/candidates" class="btn btn-secondary shadow-sm">Cancel</a>
                                 </div>
                             </div>
                         </div>

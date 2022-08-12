@@ -54,7 +54,7 @@ export const getCreate = (req, res) => {
                 "errors",
                 "Need to have two active candidates to start a election."
               );
-              res.redirect("/elections");
+              res.redirect("/admin/elections");
             }
           })
           .catch((err) => {
@@ -62,7 +62,7 @@ export const getCreate = (req, res) => {
           });
       } else {
         req.flash("errors", "Cannot create an election on an active election.");
-        res.redirect("/elections");
+        res.redirect("/admin/elections");
       }
     })
     .catch((err) => {
@@ -80,7 +80,7 @@ export const postCreate = (req, res) => {
     status: true,
   })
     .then(() => {
-      res.redirect("/elections");
+      res.redirect("/admin/elections");
     })
     .catch((err) => {
       console.log(err);
@@ -95,7 +95,7 @@ export const getEdit = (req, res) => {
       const election = result.dataValues;
 
       if (!election) {
-        return res.redirect("/elections");
+        return res.redirect("/admin/elections");
       }
 
       res.render("admin/election/save", {
@@ -125,7 +125,7 @@ export const postEdit = (req, res) => {
     { where: { id: id } }
   )
     .then(() => {
-      return res.redirect("/elections");
+      return res.redirect("/admin/elections");
     })
     .catch((err) => {
       console.log(err);
@@ -140,7 +140,7 @@ export const getFinalize = (req, res) => {
       const election = result.dataValues;
 
       if (!election) {
-        return res.redirect("/elections");
+        return res.redirect("/admin/elections");
       }
 
       res.render("admin/election/finalize", {
@@ -166,7 +166,7 @@ export const postFinalize = (req, res) => {
     { where: { id: id } }
   )
     .then(() => {
-      return res.redirect("/elections");
+      return res.redirect("/admin/elections");
     })
     .catch((err) => {
       console.log(err);
@@ -181,7 +181,7 @@ export const getResults = (req, res) => {
       const election = result.dataValues;
 
       if (!election) {
-        return res.redirect("/elections");
+        return res.redirect("/admin/elections");
       }
 
       res.render("admin/election/results", {
