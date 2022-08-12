@@ -6,5 +6,6 @@ const voteRoutes = express.Router();
 const basePath = "/home/vote";
 
 voteRoutes.get(`${basePath}`, isVote, voteController.getIndex);
+voteRoutes.post(`${basePath}/finish`, isVote, voteController.postFinish);
 
 export default voteRoutes;

@@ -1,3 +1,125 @@
 <main>
-  <h1>Voting page.</h1>
+  <div class="row justify-content-center mb-4">
+    <div class="col-11">
+      <div class="shadow-sm">
+        <form method="post" action="/home/vote/finish">
+          <div class="accordion" id="accordionExample">
+            {{#each positions as |position|}}
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="heading{{position.id}}">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapse{{position.id}}"
+                    aria-expanded="false"
+                    aria-controls="collapse{{position.id}}"
+                  >
+                    <h4>{{position.name}}</h4>
+                  </button>
+                </h2>
+                <div
+                  id="collapse{{position.id}}"
+                  class="accordion-collapse collapse"
+                  aria-labelledby="heading{{position.id}}"
+                  data-bs-parent="#accordionExample"
+                >
+                  <div class="accordion-body">
+                    <div class="row">
+                      {{#each ../candidates as |candidate|}}
+                        {{#if (equalValue candidate.positionId position.id)}}
+                          <div class="col-3 mb-3">
+                            <div class="card shadow-sm h-100">
+                              <div class="text-center mt-3">
+                                <img
+                                  src="/public/assets/images/nobody.jpg"
+                                  alt="Nobody"
+                                  class="img-thumbnail img-fluid h-100"
+                                  width="200px"
+                                />
+                              </div>
+                              <div class="card-body">
+                                <h4>None</h4>
+                                <div>
+                                  <div class="form-check">
+                                    <input
+                                      id="0"
+                                      class="form-check-input"
+                                      type="radio"
+                                      name="{{candidate.position.dataValues.name}}Id"
+                                      value="0"
+                                    >
+                                    <label class="form-check-label" for="0">
+                                      Vote for nobody
+                                    </label>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-3 mb-3">
+                            <div class="card shadow-sm h-100">
+                              <div class="text-center mt-3">
+                                <img
+                                  src="{{candidate.profilePicture}}"
+                                  alt="{{candidate.name}}"
+                                  class="img-thumbnail img-fluid h-100"
+                                  width="200px"
+                                />
+                                <img
+                                  src="{{candidate.party.dataValues.logo}}"
+                                  alt="{{candidate.party.dataValues.name}}"
+                                  class="img-thumbnail img-fluid"
+                                  width="100px"
+                                />
+                              </div>
+                              <div class="card-body">
+                                <h4>{{candidate.name}} {{candidate.lastName}}</h4>
+                                <div>
+                                  <div>
+                                    <label
+                                      class="card-subtitle text-muted"
+                                    >Party:</label>
+                                    <span
+                                      class=""
+                                    >{{candidate.party.dataValues.name}}</span>
+                                  </div>
+                                  <div>
+                                    <label class="card-subtitle text-muted">Position
+                                      to aspire:</label>
+                                    <span
+                                      class=""
+                                    >{{candidate.position.dataValues.name}}</span>
+                                  </div>
+                                  <div class="form-check">
+                                    <input
+                                      id="{{candidate.id}}"
+                                      class="form-check-input"
+                                      type="radio"
+                                      name="{{candidate.position.dataValues.name}}Id"
+                                      value="{{candidate.id}}"
+                                    >
+                                    <label class="form-check-label" for="{{candidate.id}}">
+                                      Vote for this candidate
+                                    </label>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        {{/if}}
+                      {{/each}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {{/each}}
+          </div>
+          <div class="container-fluid text-center mt-4">
+            <button type="submit" class="btn btn-primary shadow-sm">Finish vote</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </main>

@@ -6,6 +6,6 @@ const homeRoutes = express.Router();
 const basePath = "/";
 
 homeRoutes.get(`${basePath}`, isVote, homeController.getIndex);
-homeRoutes.post(`${basePath}home/vote`, isVote, homeController.postVote);
+homeRoutes.post(`${basePath}home/citizen`, isVote, homeController.postCitizen);
 
 export default homeRoutes;

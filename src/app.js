@@ -43,6 +43,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "../public")));
 const imagePath = "/public/images";
 app.use(imagePath, express.static(path.join(__dirname, `..${imagePath}`)));
+const assetsPath = "/public/assets";
+app.use(assetsPath, express.static(path.join(__dirname, `..${assetsPath}`)));
 app.use(imageStorage);
 app.use(
   session({ secret: "anything", resave: true, saveUninitialized: false })
