@@ -11,19 +11,19 @@ export const getIndex = (req, res) => {
 export const postVote = (req, res) => {
   const identificationDocument = req.body.identificationDocument;
 
-  Election.findAll()
-    .then((result) => {
-      const electionsResult = result.map((result) => result.dataValues);
-      let activeElection = false;
+  if (identificationDocument.length === 12) {
+    Election.findAll()
+      .then((result) => {
+        const electionsResult = result.map((result) => result.dataValues);
+        let activeElection = false;
 
-      electionsResult.forEach((election) => {
-        if (election.status) {
-          activeElection = election.status;
-        }
-      });
+        electionsResult.forEach((election) => {
+          if (election.status) {
+            activeElection = election.status;
+          }
+        });
 
-      if (activeElection) {
-        if (identificationDocument.length === 12) {
+        if (activeElection) {
           Citizen.findOne({
             where: { identificationDocument: identificationDocument },
           })
@@ -47,15 +47,15 @@ export const postVote = (req, res) => {
               console.log(err);
             });
         } else {
-          req.flash("errors", "Invalid Citizen ID.");
+          req.flash("errors", "There is no active election.");
           return res.redirect("/");
         }
-      } else {
-        req.flash("errors", "There is no active election.");
-        return res.redirect("/");
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  } else {
+    req.flash("errors", "Invalid Citizen ID.");
+    return res.redirect("/");
+  }
 };
