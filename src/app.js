@@ -9,6 +9,9 @@ import database from "./helpers/database.helper.js";
 import Candidate from "./models/candidate.model.js";
 import Party from "./models/party.model.js";
 import Position from "./models/position.model.js";
+import Vote from "./models/vote.model.js";
+import Election from "./models/election.model.js";
+import Citizen from "./models/citizen.model.js";
 import { checkSession } from "./middleware/auth.middleware.js";
 import session from "express-session";
 import authRoutes from "./routes/auth.routes.js";
@@ -66,14 +69,22 @@ app.use(electionRoutes);
 app.use(errorRoutes);
 
 // Database relationships.
+// Candidate
 Candidate.belongsTo(Party, { constraints: true, onDelete: "CASCADE" });
 Party.hasMany(Candidate);
 Candidate.belongsTo(Position, { constraints: true, onDelete: "CASCADE" });
 Position.hasMany(Candidate);
+// Vote
+Vote.belongsTo(Position, { constraints: true, onDelete: "CASCADE" });
+Position.hasMany(Vote);
+Vote.belongsTo(Election, { constraints: true, onDelete: "CASCADE" });
+Election.hasMany(Vote);
+Vote.belongsTo(Citizen, { constraints: true, onDelete: "CASCADE" });
+Citizen.hasMany(Vote);
 
 // Init database and start the server.
 database
-  .sync(/*{ force: true }*/)
+  .sync(/* { force: true } */)
   .then((_) => {
     app.listen(PORT, () =>
       console.log(`Server running on port http://localhost:${PORT}`)

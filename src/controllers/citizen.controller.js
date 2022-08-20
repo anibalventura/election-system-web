@@ -31,7 +31,7 @@ export const getCreate = (req, res) => {
       });
 
       if (activeElection) {
-        req.flash("errors", "Cannot create parties on an active election.");
+        req.flash("errors", "Cannot create citizens on an active election.");
         res.redirect("/admin/citizens");
       } else {
         res.render("admin/citizen/save", {
