@@ -16,9 +16,7 @@ const getAllParties = () => {
       parties = [];
       parties = partiesResult.filter((party) => party.status);
     })
-    .catch((err) => {
-      console.log(err);
-    });
+    .catch((err) => console.log(err));
 };
 
 const getAllPositions = () => {
@@ -28,9 +26,7 @@ const getAllPositions = () => {
       positions = [];
       positions = positionsResult.filter((position) => position.status);
     })
-    .catch((err) => {
-      console.log(err);
-    });
+    .catch((err) => console.log(err));
 };
 
 export const getIndex = (req, res) => {
@@ -114,29 +110,21 @@ export const getIndex = (req, res) => {
                           },
                         });
                       })
-                      .catch((err) => {
-                        console.log(err);
-                      });
+                      .catch((err) => console.log(err));
                   } else {
                     req.flash("errors", "Citizen is inactive.");
                     return res.redirect("/");
                   }
                 })
-                .catch((err) => {
-                  console.log(err);
-                });
+                .catch((err) => console.log(err));
             })
-            .catch((err) => {
-              console.log(err);
-            });
+            .catch((err) => console.log(err));
         } else {
           req.flash("errors", "There is no active election.");
           return res.redirect("/");
         }
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => console.log(err));
   } else {
     req.flash("errors", "Invalid Citizen ID.");
     return res.redirect("/");
@@ -175,12 +163,8 @@ export const postFinish = (req, res) => {
                 electionId: electionId,
                 citizenId: citizenResult.id,
               })
-                .then((result) => {
-                  return res.redirect("/");
-                })
-                .catch((err) => {
-                  console.log(err);
-                });
+                .then(() => {})
+                .catch((err) => console.log(err));
             }
           }
         })
