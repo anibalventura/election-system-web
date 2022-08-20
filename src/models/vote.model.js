@@ -8,10 +8,6 @@ const Vote = database.define("votes", {
     autoIncrement: true,
     allowNull: false,
   },
-  candidateId: {
-    type: Sequelize.INTEGER,
-    allowNull: false,
-  },
 });
 
 export default Vote;

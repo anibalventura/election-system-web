@@ -77,6 +77,8 @@ Position.hasMany(Candidate);
 // Vote
 Vote.belongsTo(Position, { constraints: true, onDelete: "CASCADE" });
 Position.hasMany(Vote);
+Vote.belongsTo(Candidate, { constraints: false, onDelete: "CASCADE" });
+Candidate.hasMany(Vote);
 Vote.belongsTo(Election, { constraints: true, onDelete: "CASCADE" });
 Election.hasMany(Vote);
 Vote.belongsTo(Citizen, { constraints: true, onDelete: "CASCADE" });

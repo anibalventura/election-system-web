@@ -2,6 +2,7 @@ import Election from "../models/election.model.js";
 import Candidate from "../models/candidate.model.js";
 import Party from "../models/party.model.js";
 import Position from "../models/position.model.js";
+import Vote from "../models/vote.model.js";
 
 let parties = [];
 let positions = [];
@@ -210,11 +211,21 @@ export const getResults = (req, res) => {
         return res.redirect("/admin/elections");
       }
 
-      res.render("admin/election/results", {
-        pageTitle: "Results",
-        electionsActive: true,
-        election: election,
-      });
+      Vote.findAll({
+        where: { electionId: id },
+      })
+        .then((result) => {
+          const votesResult = result.map((result) => result.dataValues);
+
+          votesResult.forEach((vote) => {});
+
+          res.render("admin/election/results", {
+            pageTitle: "Results",
+            electionsActive: true,
+            election: election,
+          });
+        })
+        .catch((err) => console.log(err));
     })
     .catch((err) => console.log(err));
 };

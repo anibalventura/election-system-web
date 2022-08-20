@@ -159,11 +159,13 @@ export const postFinish = (req, res) => {
             if (candidateId) {
               Vote.create({
                 positionId: positionId,
-                candidateId: candidateId,
+                candidateId: candidateId === "0" ? null : candidateId,
                 electionId: electionId,
                 citizenId: citizenResult.id,
               })
-                .then(() => {})
+                .then(() => {
+                  return res.redirect("/");
+                })
                 .catch((err) => console.log(err));
             }
           }
