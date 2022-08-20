@@ -85,11 +85,9 @@ Citizen.hasMany(Vote);
 // Init database and start the server.
 database
   .sync(/* { force: true } */)
-  .then((_) => {
+  .then(() => {
     app.listen(PORT, () =>
       console.log(`Server running on port http://localhost:${PORT}`)
     );
   })
-  .catch((err) => {
-    console.log(err);
-  });
+  .catch((err) => console.log(err));

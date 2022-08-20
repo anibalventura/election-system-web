@@ -13,9 +13,7 @@ export const getIndex = (req, res) => {
         hasCitizens: citizensResult.length > 0,
       });
     })
-    .catch((err) => {
-      console.log(err);
-    });
+    .catch((err) => console.log(err));
 };
 
 export const getCreate = (req, res) => {
@@ -41,9 +39,7 @@ export const getCreate = (req, res) => {
         });
       }
     })
-    .catch((err) => {
-      console.log(err);
-    });
+    .catch((err) => console.log(err));
 };
 
 export const postCreate = (req, res) => {
@@ -62,9 +58,7 @@ export const postCreate = (req, res) => {
     .then(() => {
       res.redirect("/admin/citizens");
     })
-    .catch((err) => {
-      console.log(err);
-    });
+    .catch((err) => console.log(err));
 };
 
 export const getEdit = (req, res) => {
@@ -97,13 +91,9 @@ export const getEdit = (req, res) => {
             activeElection: activeElection,
           });
         })
-        .catch((err) => {
-          console.log(err);
-        });
+        .catch((err) => console.log(err));
     })
-    .catch((err) => {
-      console.log(err);
-    });
+    .catch((err) => console.log(err));
 };
 
 export const postEdit = (req, res) => {
@@ -127,7 +117,5 @@ export const postEdit = (req, res) => {
     .then(() => {
       return res.redirect("/admin/citizens");
     })
-    .catch((err) => {
-      console.log(err);
-    });
+    .catch((err) => console.log(err));
 };

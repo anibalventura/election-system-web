@@ -93,17 +93,11 @@ export const postRegister = (req, res) => {
             .then((user) => {
               res.redirect("/home/auth/login");
             })
-            .catch((err) => {
-              console.log(err);
-            });
+            .catch((err) => console.log(err));
         })
-        .catch((err) => {
-          console.log(err);
-        });
+        .catch((err) => console.log(err));
     })
-    .catch((err) => {
-      console.log(err);
-    });
+    .catch((err) => console.log(err));
 };
 
 export const postLogout = (req, res) => {

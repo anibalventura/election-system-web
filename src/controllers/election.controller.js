@@ -13,9 +13,7 @@ const getAllParties = () => {
       parties = [];
       parties = partiesResult.filter((party) => party.status);
     })
-    .catch((err) => {
-      console.log(err);
-    });
+    .catch((err) => console.log(err));
 };
 
 const getAllPositions = () => {
@@ -25,9 +23,7 @@ const getAllPositions = () => {
       positions = [];
       positions = positionsResult.filter((position) => position.status);
     })
-    .catch((err) => {
-      console.log(err);
-    });
+    .catch((err) => console.log(err));
 };
 
 export const getIndex = (req, res) => {
@@ -42,9 +38,7 @@ export const getIndex = (req, res) => {
         hasElections: electionsResult.length > 0,
       });
     })
-    .catch((err) => {
-      console.log(err);
-    });
+    .catch((err) => console.log(err));
 };
 
 export const getCreate = (req, res) => {
@@ -103,17 +97,13 @@ export const getCreate = (req, res) => {
               res.redirect("/admin/elections");
             }
           })
-          .catch((err) => {
-            console.log(err);
-          });
+          .catch((err) => console.log(err));
       } else {
         req.flash("errors", "Cannot create an election on an active election.");
         res.redirect("/admin/elections");
       }
     })
-    .catch((err) => {
-      console.log(err);
-    });
+    .catch((err) => console.log(err));
 };
 
 export const postCreate = (req, res) => {
@@ -128,9 +118,7 @@ export const postCreate = (req, res) => {
     .then(() => {
       res.redirect("/admin/elections");
     })
-    .catch((err) => {
-      console.log(err);
-    });
+    .catch((err) => console.log(err));
 };
 
 export const getEdit = (req, res) => {
@@ -151,9 +139,7 @@ export const getEdit = (req, res) => {
         editMode: true,
       });
     })
-    .catch((err) => {
-      console.log(err);
-    });
+    .catch((err) => console.log(err));
 };
 
 export const postEdit = (req, res) => {
@@ -173,9 +159,7 @@ export const postEdit = (req, res) => {
     .then(() => {
       return res.redirect("/admin/elections");
     })
-    .catch((err) => {
-      console.log(err);
-    });
+    .catch((err) => console.log(err));
 };
 
 export const getFinalize = (req, res) => {
@@ -195,9 +179,7 @@ export const getFinalize = (req, res) => {
         electionsActive: true,
       });
     })
-    .catch((err) => {
-      console.log(err);
-    });
+    .catch((err) => console.log(err));
 };
 
 export const postFinalize = (req, res) => {
@@ -214,9 +196,7 @@ export const postFinalize = (req, res) => {
     .then(() => {
       return res.redirect("/admin/elections");
     })
-    .catch((err) => {
-      console.log(err);
-    });
+    .catch((err) => console.log(err));
 };
 
 export const getResults = (req, res) => {
@@ -236,7 +216,5 @@ export const getResults = (req, res) => {
         election: election,
       });
     })
-    .catch((err) => {
-      console.log(err);
-    });
+    .catch((err) => console.log(err));
 };

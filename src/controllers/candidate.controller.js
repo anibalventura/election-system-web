@@ -15,9 +15,7 @@ const getAllParties = () => {
       parties = [];
       parties.push(...partiesResult);
     })
-    .catch((err) => {
-      console.log(err);
-    });
+    .catch((err) => console.log(err));
 };
 
 const getAllPositions = () => {
@@ -28,9 +26,7 @@ const getAllPositions = () => {
       positions = [];
       positions.push(...positionsResult);
     })
-    .catch((err) => {
-      console.log(err);
-    });
+    .catch((err) => console.log(err));
 };
 
 export const getIndex = (req, res) => {
@@ -47,9 +43,7 @@ export const getIndex = (req, res) => {
         hasCandidates: candidates.length > 0,
       });
     })
-    .catch((err) => {
-      console.log(err);
-    });
+    .catch((err) => console.log(err));
 };
 
 export const getCreate = (req, res) => {
@@ -94,18 +88,12 @@ export const getCreate = (req, res) => {
                   },
                 });
               })
-              .catch((err) => {
-                console.log(err);
-              });
+              .catch((err) => console.log(err));
           })
-          .catch((err) => {
-            console.log(err);
-          });
+          .catch((err) => console.log(err));
       }
     })
-    .catch((err) => {
-      console.log(err);
-    });
+    .catch((err) => console.log(err));
 };
 
 export const postCreate = (req, res) => {
@@ -126,9 +114,7 @@ export const postCreate = (req, res) => {
     .then((result) => {
       res.redirect("/admin/candidates");
     })
-    .catch((err) => {
-      console.log(err);
-    });
+    .catch((err) => console.log(err));
 };
 
 export const getEdit = (req, res) => {
@@ -172,13 +158,9 @@ export const getEdit = (req, res) => {
             },
           });
         })
-        .catch((err) => {
-          console.log(err);
-        });
+        .catch((err) => console.log(err));
     })
-    .catch((err) => {
-      console.log(err);
-    });
+    .catch((err) => console.log(err));
 };
 
 export const postEdit = (req, res) => {
@@ -216,11 +198,7 @@ export const postEdit = (req, res) => {
         .then(() => {
           return res.redirect("/admin/candidates");
         })
-        .catch((err) => {
-          console.log(err);
-        });
+        .catch((err) => console.log(err));
     })
-    .catch((err) => {
-      console.log(err);
-    });
+    .catch((err) => console.log(err));
 };
