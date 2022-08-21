@@ -34,7 +34,7 @@ export const getIndex = (req, res) => {
 
   if (
     identificationDocument !== undefined &&
-    identificationDocument.length === 12
+    identificationDocument.length === 13
   ) {
     Election.findAll()
       .then((result) => {
