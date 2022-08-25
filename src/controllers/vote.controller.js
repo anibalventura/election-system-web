@@ -40,10 +40,12 @@ export const getIndex = (req, res) => {
       .then((result) => {
         const electionsResult = result.map((result) => result.dataValues);
         let activeElection = false;
+        let electionId;
 
         electionsResult.forEach((election) => {
           if (election.status) {
             activeElection = election.status;
+            electionId = election.id;
           }
         });
 
@@ -57,7 +59,9 @@ export const getIndex = (req, res) => {
                 return res.redirect("/");
               }
 
-              Vote.findOne({ where: { citizenId: citizen.id } })
+              Vote.findOne({
+                where: { citizenId: citizen.id, electionId: electionId },
+              })
                 .then((vote) => {
                   if (vote) {
                     req.flash(
